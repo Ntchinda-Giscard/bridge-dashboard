@@ -64,7 +64,7 @@ export default function Page(){
                 </div>
                 <UserTable
                     onDelete={(v:any) =>handleDelete(v)}
-                    onEdit={(v:any) =>handleEdit(v)}
+                    onUpdate={(v:any) =>handleEdit(v)}
                 />
             </Paper>
         </main>

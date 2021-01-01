@@ -43,7 +43,7 @@ export default function EditUser({opened, close}: any) {
 
   return (
     <>
-      <Modal opened={opened} size="lg" onClose={close} title= {<p style={{color: "#404040"}}> Ajouter Utilisateur </p>}>
+      <Modal opened={opened} size="lg" onClose={close} title= {<p style={{color: "#404040"}}> Modofier Utilisateur </p>}>
         {/* Modal content */}
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
             <Stack gap={5} >
