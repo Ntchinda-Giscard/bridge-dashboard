@@ -1,8 +1,9 @@
 "use client"
 import { useState } from 'react';
 import cx from 'clsx';
-import { Avatar, Checkbox, Group, ScrollArea, Table, Text } from '@mantine/core';
+import { Avatar, Checkbox, Group, ScrollArea, Table, Text, ActionIcon } from '@mantine/core';
 import classes from './TableSelection.module.css';
+import { IconPencil, IconTrash, IconEye } from '@tabler/icons-react';
 
 
 const data = [
@@ -48,7 +49,7 @@ const data = [
   },
 ];
 
-export function UserTable() {
+export function UserTable({onDelete}: any) {
   const [selection, setSelection] = useState(['1']);
   const toggleRow = (id: string) =>
     setSelection((current) =>
@@ -74,6 +75,16 @@ export function UserTable() {
         </Table.Td>
         <Table.Td>{item.email}</Table.Td>
         <Table.Td>{item.job}</Table.Td>
+        <Table.Td>
+          <Group gap={0} justify="flex-end">
+            <ActionIcon variant="subtle" color="gray">
+              <IconPencil size={16} stroke={1.5} />
+            </ActionIcon>
+            <ActionIcon onClick={() => onDelete(item)} variant="subtle" color="red">
+              <IconTrash size={16} stroke={1.5} />
+            </ActionIcon>
+          </Group>
+        </Table.Td>
       </Table.Tr>
     );
   });

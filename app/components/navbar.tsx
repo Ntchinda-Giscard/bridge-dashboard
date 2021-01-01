@@ -1,18 +1,14 @@
 import { useState } from 'react';
 import {
-  Icon2fa,
-  IconUsers,
-  IconDatabaseImport,
-  IconFingerprint,
-  IconKey,
   IconLogout,
   IconFileStack,
   IconUsersGroup,
   IconDashboard,
+  IconUsers
 } from '@tabler/icons-react';
 import { Code, Group } from '@mantine/core';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation';
 
 import classes from './NavbarSimple.module.css';
 
@@ -20,17 +16,25 @@ const data = [
   { link: '/dashboard', label: 'Tableau de bord', icon: IconDashboard },
   { link: '/dashboard/demands', label: ' Demandes', icon: IconFileStack },
   { link: '/dashboard/users', label: ' Utilisateur', icon: IconUsers },
-  { link: '', label: ' Partenaires', icon: IconUsersGroup },
+  { link: '/dashbaord/partners', label: ' Partenaires', icon: IconUsersGroup },
 ];
 
 export function NavbarSimple() {
-  const [active, setActive] = useState('Billing');
+  const [active, setActive] = useState(data[0].link);
   const router = useRouter();
+  const pathname = usePathname();
+
+  const isActive = (path: string) => {
+    if (path === '/dashboard') {
+      return pathname === '/dashboard';
+    }
+    return pathname.startsWith(path);
+  };
 
   const links = data.map((item) => (
     <Link
       className={classes.link}
-      data-active={item.label === active || undefined}
+      data-active={isActive(item.link) ?  item.label : undefined}
       href={item.link}
       key={item.label}
       onClick={(event) => {
