@@ -2,6 +2,10 @@
 import '@mantine/core/styles.css';
 import NextTopLoader from 'nextjs-toploader';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
+import { Provider } from 'react-redux'
+import {store} from "@/app/store";
+import React from 'react';
+import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
 
 
 export default function Providers({
@@ -9,9 +13,20 @@ export default function Providers({
   }: {
     children: React.ReactNode;
   }) {
-  
-  const adminSecret = "cBUCi2wfVzpC5j16ede1stHx4nEajfTnWk0V43TRz3gVk0tGrXQ5VcILCqRJ0dkt";
-  
+  const adminSecret = "rGvtJPPzqVUtdlnOA47eMp3DhiiNqqAF";
+    const httpLink = new HttpLink({
+        uri: "https://your-hasura-instance.com/v1/graphql", // Replace with your Hasura GraphQL URL
+        headers: {
+            "x-hasura-admin-secret": adminSecret, // Replace with your admin secret
+        },
+    });
+
+// Create the Apollo Client instance
+    const client = new ApolloClient({
+        link: httpLink,
+        cache: new InMemoryCache(),
+    });
+
     return (
       <html lang="en">
         <head>
@@ -19,11 +34,15 @@ export default function Providers({
         </head>
         <body>
         <MantineProvider>
+            <Provider store={store}>
+                <ApolloProvider client={client}>
           <NextTopLoader
               color={"#0B8F23"}
               template='<div class="bar" role="bar"><div class="peg"></div></div>'
             />
             {children}
+                </ApolloProvider>
+            </Provider>
         </MantineProvider>
         </body>
       </html>

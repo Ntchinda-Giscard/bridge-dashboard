@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@apollo/client": "^3.12.6",
     "@mantine/carousel": "^7.13.3",
     "@mantine/charts": "^7.13.3",
     "@mantine/code-highlight": "^7.13.3",
@@ -22,6 +23,7 @@
     "@mantine/nprogress": "^7.13.3",
     "@mantine/spotlight": "^7.13.3",
     "@mantine/tiptap": "^7.13.3",
+    "@reduxjs/toolkit": "^2.5.0",
     "@tabler/icons-react": "^3.28.1",
     "@tiptap/extension-link": "^2.8.0",
     "@tiptap/pm": "^2.8.0",
@@ -29,11 +31,14 @@
     "@tiptap/starter-kit": "^2.8.0",
     "dayjs": "^1.11.13",
     "embla-carousel-react": "^7.1.0",
+    "graphql": "^16.10.0",
     "next": "14.2.15",
     "nextjs-toploader": "^3.7.15",
     "react": "^18",
     "react-dom": "^18",
-    "recharts": "^2.13.0"
+    "react-redux": "^9.2.0",
+    "recharts": "^2.13.0",
+    "redux-persist": "^6.0.0"
   },
   "devDependencies": {
     "@types/node": "^20",
