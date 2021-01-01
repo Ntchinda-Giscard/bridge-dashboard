@@ -17,7 +17,7 @@ export default function Page(){
                             rightSection={<IconSearch style={{width: rem(16), height: rem(16)}} />}
                             placeholder='Exporter'
                         />
-                        <Button radius={'md'} color={'green'}></Button>
+                        <Button radius={'md'} color={'green'}>Ajouter un utilisateur </Button>
                     </div>
 
                 </div>
