@@ -49,7 +49,7 @@ const data = [
   },
 ];
 
-export function UserTable({onDelete}: any) {
+export function UserTable({onDelete, onUpdate}: any) {
   const [selection, setSelection] = useState(['1']);
   const toggleRow = (id: string) =>
     setSelection((current) =>
@@ -77,7 +77,7 @@ export function UserTable({onDelete}: any) {
         <Table.Td>{item.job}</Table.Td>
         <Table.Td>
           <Group gap={0} justify="flex-end">
-            <ActionIcon variant="subtle" color="gray">
+            <ActionIcon onClick={() => onUpdate(item)} variant="subtle" color="gray">
               <IconPencil size={16} stroke={1.5} />
             </ActionIcon>
             <ActionIcon onClick={() => onDelete(item)} variant="subtle" color="red">

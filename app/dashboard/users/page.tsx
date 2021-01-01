@@ -6,15 +6,23 @@ import AddUser from "./components/addUserModal";
 import { useDisclosure } from "@mantine/hooks";
 import { useState } from "react";
 import DeleteUserModal from "./components/deleteUserModal";
+import EditUser from "./components/editUserModal";
 
 export default function Page(){
     const [addOpenedUser, { open: openAddUser, close: closeUser }] = useDisclosure(false);
     const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
     const [deleteData, setDeleteData] = useState();
+    const [editValue, setEditValue] = useState(null);
+    const [editOpenedVisitor, { open: openEdit, close: closeEdit }] = useDisclosure(false);
 
     const handleDelete= (v: any) =>{
         setDeleteData(v)
         openDelete()
+    }
+    const handleEdit = (v: any) =>{
+        setEditValue(v)
+        console.log(v)
+        openEdit()
     }
 
 
@@ -28,6 +36,11 @@ export default function Page(){
                 data={deleteData}
                 opened = {openedDelete}
                 close={closeDelete}
+            />
+            <EditUser
+                opened={editOpenedVisitor}
+                close={closeEdit}
+                data={editValue}
             />
             <p style={{fontWeight: 800, fontSize: "large", color: "#404040"}}> Utitlisateur </p>
             <Paper radius='md' shadow='md'>
@@ -51,6 +64,7 @@ export default function Page(){
                 </div>
                 <UserTable
                     onDelete={(v:any) =>handleDelete(v)}
+                    onEdit={(v:any) =>handleEdit(v)}
                 />
             </Paper>
         </main>
