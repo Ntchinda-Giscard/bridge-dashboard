@@ -8,7 +8,7 @@ import {
     Text,
     Anchor,
   } from '@mantine/core';
-  import classes from './AuthenticationImage.module.css';
+  // import classes from './AuthenticationImage.module.css';
   
   export function AuthenticationImage() {
     return (
