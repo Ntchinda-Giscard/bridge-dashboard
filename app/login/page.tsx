@@ -10,7 +10,7 @@ import {
   } from '@mantine/core';
   // import classes from './AuthenticationImage.module.css';
   
-  export function AuthenticationImage() {
+  export default function AuthenticationImage() {
     return (
       <div className={''}>
         <Paper className={''} radius={0} p={30}>
