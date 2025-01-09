@@ -1,5 +1,6 @@
 "use client"
 import '@mantine/core/styles.css';
+import NextTopLoader from 'nextjs-toploader';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 
 
@@ -18,6 +19,10 @@ export default function Providers({
         </head>
         <body>
         <MantineProvider>
+          <NextTopLoader
+              color={"#0B8F23"}
+              template='<div class="bar" role="bar"><div class="peg"></div></div>'
+            />
             {children}
         </MantineProvider>
         </body>

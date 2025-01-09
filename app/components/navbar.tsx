@@ -19,7 +19,7 @@ import classes from './NavbarSimple.module.css';
 const data = [
   { link: '/dashboard', label: 'Tableau de bord', icon: IconDashboard },
   { link: '/dashboard/demands', label: ' Demandes', icon: IconFileStack },
-  { link: '/dashboard/users', label: ' Utilisatuer', icon: IconUsers },
+  { link: '/dashboard/users', label: ' Utilisateur', icon: IconUsers },
   { link: '', label: ' Partenaires', icon: IconUsersGroup },
 ];
 

@@ -1,4 +1,5 @@
-import { IconPencil, IconTrash } from '@tabler/icons-react';
+"use client"
+import { IconPencil, IconTrash, IconEye } from '@tabler/icons-react';
 import { ActionIcon, Anchor, Avatar, Badge, Group, Table, Text } from '@mantine/core';
 
 const data = [
@@ -6,7 +7,8 @@ const data = [
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-1.png',
     name: 'Robert Wolfkisser',
-    job: 'Engineer',
+    job: 'Encour',
+    date: '20/12/2025',
     email: 'rob_wolf@gmail.com',
     phone: '+44 (452) 886 09 12',
   },
@@ -14,7 +16,8 @@ const data = [
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-7.png',
     name: 'Jill Jailbreaker',
-    job: 'Engineer',
+    job: 'Encour',
+    date: '20/12/2025',
     email: 'jj@breaker.com',
     phone: '+44 (934) 777 12 76',
   },
@@ -22,7 +25,8 @@ const data = [
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-2.png',
     name: 'Henry Silkeater',
-    job: 'Designer',
+    job: 'Effectuer',
+    date: '20/12/2025',
     email: 'henry@silkeater.io',
     phone: '+44 (901) 384 88 34',
   },
@@ -30,7 +34,8 @@ const data = [
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-3.png',
     name: 'Bill Horsefighter',
-    job: 'Designer',
+    job: 'Effectuer',
+    date: '20/12/2025',
     email: 'bhorsefighter@gmail.com',
     phone: '+44 (667) 341 45 22',
   },
@@ -38,19 +43,20 @@ const data = [
     avatar:
       'https://raw.githubusercontent.com/mantinedev/mantine/master/.demo/avatars/avatar-10.png',
     name: 'Jeremy Footviewer',
-    job: 'Manager',
+    job: 'Rejeter',
+    date: '20/12/2025',
     email: 'jeremy@foot.dev',
     phone: '+44 (881) 245 65 65',
   },
 ];
 
 const jobColors: Record<string, string> = {
-  engineer: 'blue',
-  manager: 'cyan',
-  designer: 'pink',
+  encour: 'blue',
+  effectuer: 'cyan',
+  rejeter: 'pink',
 };
 
-export function UsersTable() {
+export function DemandTable() {
   const rows = data.map((item) => (
     <Table.Tr key={item.name}>
       <Table.Td>
@@ -68,6 +74,9 @@ export function UsersTable() {
         </Badge>
       </Table.Td>
       <Table.Td>
+        <Text fz="sm">{item.date}</Text>
+      </Table.Td>
+      <Table.Td>
         <Anchor component="button" size="sm">
           {item.email}
         </Anchor>
@@ -79,6 +88,9 @@ export function UsersTable() {
         <Group gap={0} justify="flex-end">
           <ActionIcon variant="subtle" color="gray">
             <IconPencil size={16} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon variant="subtle" color="blue">
+            <IconEye size={16} stroke={1.5} />
           </ActionIcon>
           <ActionIcon variant="subtle" color="red">
             <IconTrash size={16} stroke={1.5} />
@@ -93,8 +105,9 @@ export function UsersTable() {
       <Table verticalSpacing="sm">
         <Table.Thead>
           <Table.Tr>
-            <Table.Th>Employee</Table.Th>
-            <Table.Th>Job title</Table.Th>
+            <Table.Th>Demandeur</Table.Th>
+            <Table.Th>Statut</Table.Th>
+            <Table.Th>Date</Table.Th>
             <Table.Th>Email</Table.Th>
             <Table.Th>Phone</Table.Th>
             <Table.Th />

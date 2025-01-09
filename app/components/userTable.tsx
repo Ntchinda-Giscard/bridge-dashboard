@@ -48,7 +48,7 @@ const data = [
   },
 ];
 
-export function TableSelection() {
+export function UserTable() {
   const [selection, setSelection] = useState(['1']);
   const toggleRow = (id: string) =>
     setSelection((current) =>
