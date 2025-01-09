@@ -17,10 +17,10 @@ import {useRouter} from 'next/navigation'
 import classes from './NavbarSimple.module.css';
 
 const data = [
-  { link: '/dashboard/users', label: 'Tableau de bord', icon: IconDashboard },
-  { link: '', label: 'Gestion demandes', icon: IconFileStack },
-  { link: '', label: 'Gestion utilisatuer', icon: IconUsers },
-  { link: '', label: 'Gestion partenaires', icon: IconUsersGroup },
+  { link: '/dashboard', label: 'Tableau de bord', icon: IconDashboard },
+  { link: '/dashboard/demands', label: ' Demandes', icon: IconFileStack },
+  { link: '/dashboard/users', label: ' Utilisatuer', icon: IconUsers },
+  { link: '', label: ' Partenaires', icon: IconUsersGroup },
 ];
 
 export function NavbarSimple() {
