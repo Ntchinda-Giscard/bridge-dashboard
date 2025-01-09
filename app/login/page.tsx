@@ -12,10 +12,10 @@ import {
   
   export default function AuthenticationImage() {
     return (
-      <div className={''}>
+      <div className={'h-sreen  '}>
         <Paper className={''} radius={0} p={30}>
           <Title order={2} className={''} c='#000'  ta="center" mt="md" mb={50}>
-            Welcome back to Mantine!
+            Welcome back to THE BRIDGE!
           </Title>
   
           <TextInput label="Email address" styles={{label:{color: "#000"}}} placeholder="hello@gmail.com" size="md" />
