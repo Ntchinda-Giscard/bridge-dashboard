@@ -8,7 +8,7 @@
   }
 
   .gradientText {
-    background: linear-gradient(90deg, #0B8F23, #03290A); /* Define the gradient */
+    background: linear-gradient(180deg, #0B8F23, #03290A); /* Define the gradient */
     -webkit-background-clip: text; /* Clip the gradient to the text */
     -webkit-text-fill-color: transparent; /* Make the text transparent to show the gradient */
     font-weight: 800;

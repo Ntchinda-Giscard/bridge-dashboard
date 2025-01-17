@@ -67,8 +67,8 @@ export function NavbarSimple() {
           <span>Change account</span>
         </Link> */}
 
-        <Link href="#" className={classes.link} 
-          // onClick={(event) => event.preventDefault()}
+        <Link href="/login" className={classes.link} 
+          // onClick={() => router.push('/login')}
         >
           <IconLogout className={classes.linkIcon} stroke={1.5} />
           <span>Logout</span>

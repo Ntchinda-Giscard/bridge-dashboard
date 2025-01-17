@@ -2,6 +2,7 @@
 import { AppShell, Burger, Group, Skeleton } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { NavbarSimple } from './components/navbar';
+import { UserButton } from './components/userButton';
 
 
 export function ResponsiveSizes({
@@ -22,9 +23,9 @@ export function ResponsiveSizes({
       padding="md"
     >
       <AppShell.Header>
-        <Group h="100%" px="md">
+        <Group h="100%" px="md" justify='between'>
           <Burger opened={opened} onClick={toggle} hiddenFrom="sm" size="sm" />
-
+          <UserButton />
         </Group>
       </AppShell.Header>
       <AppShell.Navbar p="md">
