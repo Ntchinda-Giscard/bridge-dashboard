@@ -33,6 +33,7 @@ export default function AddUser({opened, close}: any) {
     });
         
     const [countries, setCountries] = useState([]);
+    const [roles, setRols] = useState([])
 
     const {data: dataRole, loading: loadRole, error: errRole} = useQuery(GET_ROLES)
 
@@ -80,7 +81,13 @@ export default function AddUser({opened, close}: any) {
         };
     
         fetchCountries();
-    }, []);
+
+        const dataRoles = dataRole?.roles?.map((r: { id: string; name: string; }) =>({
+            value: r?.id,
+            label: r?.name
+        }))
+
+    }, [dataRole]);
     const [insertUser, {loading: loadInsert}] = useMutation(INSERT_USERS);
 
   return (
