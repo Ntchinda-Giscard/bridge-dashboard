@@ -10,6 +10,7 @@ import {
     Anchor,
   } from '@mantine/core';
   import Link from  'next/link'
+  import {useRouter} from 'next/navigation'
   import classes from '../components/NavbarSimple.module.css';
 import { useLazyQuery } from '@apollo/client';
 import { LOGIN_USER } from './query/login';
@@ -18,6 +19,7 @@ import toast from 'react-hot-toast';
 
   
 export default function AuthenticationImage() {
+  const router = useRouter()
   const [loginUser, {data: dataLogin, loading: loadingLogin}] = useLazyQuery(LOGIN_USER);
   const form = useForm({
     mode: 'uncontrolled',
@@ -41,7 +43,11 @@ export default function AuthenticationImage() {
       },
       onCompleted: (data) =>{
         toast.success("Login successful")
-        localStorage.setItem("bridge-token", data?.users?.[0])
+        if(data?.users?.length > 1) {
+          localStorage.setItem("bridge-token", data?.users?.[0])
+          router.puch("/dashboard")
+        }
+        
       },
       onError: (err) =>{
         toast.error(`${err.message}`)
