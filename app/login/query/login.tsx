@@ -3,7 +3,7 @@ import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
 query LoginUser($email: String!, $mot_passe: String!) @cached {
-  users(where: {email: {_eq: $_eq}, mot_passe: {_eq: $_eq1}}) {
+  users(where: {email: {_eq: $email}, mot_passe: {_eq: $mot_passe}}) {
     telephone
     sexe
     role_id

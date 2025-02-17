@@ -37,7 +37,7 @@ export default function AuthenticationImage() {
     loginUser({
       variables:{
         email: values?.email,
-        password: values?.password
+        mot_passe: values?.password
       },
       onCompleted: (data) =>{
         toast.success("Login successful")
