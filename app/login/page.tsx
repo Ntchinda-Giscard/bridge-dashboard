@@ -45,7 +45,7 @@ export default function AuthenticationImage() {
         toast.success("Login successful")
         if(data?.users?.length > 1) {
           localStorage.setItem("bridge-token", data?.users?.[0])
-          router.puch("/dashboard")
+          router.push("/dashboard")
         }
         
       },
