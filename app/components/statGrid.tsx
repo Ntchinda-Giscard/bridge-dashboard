@@ -17,10 +17,10 @@ import {
   };
   
   const data = [
-    { title: 'Revenue', icon: 'receipt', value: '13,456', diff: 34 },
-    { title: 'Profit', icon: 'coin', value: '4,145', diff: -13 },
-    { title: 'Coupons usage', icon: 'discount', value: '745', diff: 18 },
-    { title: 'New customers', icon: 'user', value: '188', diff: -30 },
+    { title: 'Revenue', icon: 'receipt', value: '0', diff: 0 },
+    { title: 'Profit', icon: 'coin', value: '0', diff: 0 },
+    { title: 'Coupons usage', icon: 'discount', value: '0', diff: 0 },
+    { title: 'New customers', icon: 'user', value: '0', diff: 0 },
   ] as const;
   
   export default function StatsGrid() {

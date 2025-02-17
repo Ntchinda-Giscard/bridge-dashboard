@@ -4,6 +4,7 @@ import { Modal, Button, TextInput, Group, Stack, Select, Textarea } from '@manti
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import axios from "axios";
 
 export default function AddUser({opened, close}: any) {
     const form = useForm({
@@ -11,20 +12,15 @@ export default function AddUser({opened, close}: any) {
         initialValues: {
           firstname: null,
           lastname: null,
-          id_card_number: null,
-          service: null,
-          department: null,
-          employee: null,
+          email: '',
           phone_number: null,
-          visitors: null,
-          reason: null,
-          vehicle: null
+          country: []
         },
     
         validate: {
             // firstname: (value) => ( value.length < 3 ? "Firtname must be 3 character at least" : null),
             // lastname: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
-            // id_card_number: (value) => ( value.length < 5 ? "Lastname must be 3 character at least" : null),
+            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
             // phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
         },
       });
@@ -34,11 +30,35 @@ export default function AddUser({opened, close}: any) {
         const [allArr, setAll] = useState([]);
         const [arrVisitor, setAllVisitor] = useState([])
         const [arrVehicle, setArrVehicle] = useState([])
+        const [loading, setLoading] = useState(true);
+        const [countries, setCountries] = useState([]);
 
  
     function handleSubmit(values: any){
         console.log(values)
     }
+
+    useEffect(() => {
+        const fetchCountries = async () => {
+          try {
+            const response = await axios.get('https://restcountries.com/v3.1/all');
+            // Map the data to the format expected by the Mantine Select component
+            const countryData = response.data.map((country: { cca2: any; name: { common: any; }; }) => ({
+              value: country.cca2,  // Use country code as value
+              label: country.name.common
+            }));
+            // Optionally sort the countries alphabetically
+            countryData.sort((a: { label: string; }, b: { label: any; }) => a.label.localeCompare(b.label));
+            setCountries(countryData);
+          } catch (error) {
+            console.error('Error fetching countries:', error);
+          } finally {
+            setLoading(false);
+          }
+        };
+    
+        fetchCountries();
+      }, []);
 
 
   return (
@@ -76,10 +96,10 @@ export default function AddUser({opened, close}: any) {
                 <Group grow>
                     <TextInput
                         withAsterisk
-                        label="Numero de CNI"
+                        label="Email"
                         placeholder="..."
-                        key={form.key('id_card_number')}
-                        {...form.getInputProps('id_card_number')}
+                        key={form.key('email')}
+                        {...form.getInputProps('email')}
                         styles={{
                             label:{
                                 color: "#404040"
@@ -89,7 +109,7 @@ export default function AddUser({opened, close}: any) {
                     <TextInput
                         withAsterisk
                         label="Numero de téléphone"
-                        placeholder="6xxxxxx"
+                        placeholder="xxxxxx"
                         key={form.key('phone_number')}
                         {...form.getInputProps('phone_number')}
                         styles={{
@@ -99,6 +119,21 @@ export default function AddUser({opened, close}: any) {
                         }}
                     />
                 </Group>
+                <Select
+                    mt={'lg'}
+                    withAsterisk
+                    radius={'sm'}
+                    data={countries}
+                    label="Pays"
+                    placeholder="select"
+                    searchable
+                    key={form.key('country')}
+                    {...form.getInputProps('country')}
+                    styles={{
+                        label:{color: "#404040"},
+                        option:{color: "#404040"}
+                    }}
+                />
             </Stack>
             
 

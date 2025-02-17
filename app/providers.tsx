@@ -15,7 +15,7 @@ export default function Providers({
   }) {
   const adminSecret = "rGvtJPPzqVUtdlnOA47eMp3DhiiNqqAF";
     const httpLink = new HttpLink({
-        uri: "https://your-hasura-instance.com/v1/graphql", // Replace with your Hasura GraphQL URL
+        uri: "https://cheerful-crane-98.hasura.app/v1/graphql", // Replace with your Hasura GraphQL URL
         headers: {
             "x-hasura-admin-secret": adminSecret, // Replace with your admin secret
         },

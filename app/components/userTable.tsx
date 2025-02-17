@@ -104,7 +104,7 @@ export function UserTable({onDelete, onUpdate}: any) {
             </Table.Th>
             <Table.Th>User</Table.Th>
             <Table.Th>Email</Table.Th>
-            <Table.Th>Job</Table.Th>
+            <Table.Th>Country</Table.Th>
           </Table.Tr>
         </Table.Thead>
         <Table.Tbody>{rows}</Table.Tbody>

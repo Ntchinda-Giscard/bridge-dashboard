@@ -4,15 +4,20 @@ import { Paper, Select, Group, Button, TextInput, rem } from "@mantine/core";
 import { IconSearch } from '@tabler/icons-react';
 import AddUser from "./components/addUserModal";
 import { useDisclosure } from "@mantine/hooks";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import DeleteUserModal from "./components/deleteUserModal";
 import EditUser from "./components/editUserModal";
+import axios from "axios";
+
 
 export default function Page(){
     const [addOpenedUser, { open: openAddUser, close: closeUser }] = useDisclosure(false);
     const [openedDelete, { open: openDelete, close: closeDelete }] = useDisclosure(false);
     const [deleteData, setDeleteData] = useState();
+    const [countries, setCountries] = useState([]);
     const [editValue, setEditValue] = useState(null);
+    const [loading, setLoading] = useState(true);
+
     const [editOpenedVisitor, { open: openEdit, close: closeEdit }] = useDisclosure(false);
 
     const handleDelete= (v: any) =>{
@@ -24,6 +29,9 @@ export default function Page(){
         console.log(v)
         openEdit()
     }
+
+
+    
 
 
     return(
