@@ -33,7 +33,7 @@ export default function AddUser({opened, close}: any) {
     });
         
     const [countries, setCountries] = useState([]);
-    const [roles, setRols] = useState([])
+    const [roles, setRoles] = useState([])
 
     const {data: dataRole, loading: loadRole, error: errRole} = useQuery(GET_ROLES)
 
@@ -86,6 +86,8 @@ export default function AddUser({opened, close}: any) {
             value: r?.id,
             label: r?.name
         }))
+
+        setRoles(dataRoles)
 
     }, [dataRole]);
     const [insertUser, {loading: loadInsert}] = useMutation(INSERT_USERS);
@@ -163,21 +165,39 @@ export default function AddUser({opened, close}: any) {
                         option:{color: "#404040"}
                     }}
                 />
-                <Select
-                    mt={'lg'}
-                    withAsterisk
-                    radius={'sm'}
-                    data={['Homme', "Femme"]}
-                    label="Genre"
-                    placeholder="select"
-                    searchable
-                    key={form.key('sexe')}
-                    {...form.getInputProps('sexe')}
-                    styles={{
-                        label:{color: "#404040"},
-                        option:{color: "#404040"}
-                    }}
-                />
+                <Group>
+                    <Select
+                        mt={'lg'}
+                        withAsterisk
+                        radius={'sm'}
+                        data={['Homme', "Femme"]}
+                        label="Genre"
+                        placeholder="select"
+                        searchable
+                        key={form.key('sexe')}
+                        {...form.getInputProps('sexe')}
+                        styles={{
+                            label:{color: "#404040"},
+                            option:{color: "#404040"}
+                        }}
+                    />
+                    <Select
+                        mt={'lg'}
+                        withAsterisk
+                        radius={'sm'}
+                        data={roles}
+                        label="Role"
+                        placeholder="select"
+                        searchable
+                        key={form.key('role')}
+                        {...form.getInputProps('role')}
+                        styles={{
+                            label:{color: "#404040"},
+                            option:{color: "#404040"}
+                        }}
+                    />
+                </Group>
+                
                 <PasswordInput 
                     withAsterisk
                     label="Mot de passe"
