@@ -1,41 +1,53 @@
 "use client"
 import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import { Modal, Button, TextInput, Group, Stack, Select, Textarea } from '@mantine/core';
+import { Modal, Button, TextInput, Group, Stack, Select, Textarea, PasswordInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios";
+import { INSERT_USERS } from '../mutation/mutation';
 
 export default function AddUser({opened, close}: any) {
+    
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
-          firstname: null,
-          lastname: null,
+          firstname: "",
+          lastname: "",
           email: '',
-          phone_number: null,
-          country: []
+          password: '',
+          phone_number: "",
+          country: [],
+          sexe: [],
         },
     
         validate: {
-            // firstname: (value) => ( value.length < 3 ? "Firtname must be 3 character at least" : null),
-            // lastname: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
+            firstname: (value) => ( value.length < 3 ? "Firtname must be 3 character at least" : null),
+            lastname: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
+            password: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            // phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
+            phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
         },
-      });
+    });
         
-        const [deptArr, setDept] = useState([]);
-        const [servArr, setServ] = useState([]);
-        const [allArr, setAll] = useState([]);
-        const [arrVisitor, setAllVisitor] = useState([])
-        const [arrVehicle, setArrVehicle] = useState([])
-        const [loading, setLoading] = useState(true);
-        const [countries, setCountries] = useState([]);
+    const [deptArr, setDept] = useState([]);
+    const [servArr, setServ] = useState([]);
+    const [allArr, setAll] = useState([]);
+    const [arrVisitor, setAllVisitor] = useState([])
+    const [arrVehicle, setArrVehicle] = useState([])
+    const [loading, setLoading] = useState(true);
+    const [countries, setCountries] = useState([]);
 
  
     function handleSubmit(values: any){
         console.log(values)
+        insertUser({
+            variables:{
+                email: values?.email,
+                prenom: values?.firstname,
+                mot_passe: values?.password
+            }
+        })
     }
 
     useEffect(() => {
@@ -44,8 +56,8 @@ export default function AddUser({opened, close}: any) {
             const response = await axios.get('https://restcountries.com/v3.1/all');
             // Map the data to the format expected by the Mantine Select component
             const countryData = response.data.map((country: { cca2: any; name: { common: any; }; }) => ({
-              value: country.cca2,  // Use country code as value
-              label: country.name.common
+              value: country.name.common,  // Use country code as value
+              label:`${ country.name.common} - ${country.cca2}`
             }));
             // Optionally sort the countries alphabetically
             countryData.sort((a: { label: string; }, b: { label: any; }) => a.label.localeCompare(b.label));
@@ -58,8 +70,8 @@ export default function AddUser({opened, close}: any) {
         };
     
         fetchCountries();
-      }, []);
-
+    }, []);
+    const [insertUser, {loading: loadInsert}] = useMutation(INSERT_USERS);
 
   return (
     <>
@@ -132,6 +144,33 @@ export default function AddUser({opened, close}: any) {
                     styles={{
                         label:{color: "#404040"},
                         option:{color: "#404040"}
+                    }}
+                />
+                <Select
+                    mt={'lg'}
+                    withAsterisk
+                    radius={'sm'}
+                    data={['Homme', "Femme"]}
+                    label="Genre"
+                    placeholder="select"
+                    searchable
+                    key={form.key('sexe')}
+                    {...form.getInputProps('sexe')}
+                    styles={{
+                        label:{color: "#404040"},
+                        option:{color: "#404040"}
+                    }}
+                />
+                <PasswordInput 
+                    withAsterisk
+                    label="Mot de passe"
+
+                    key={form.key('password')}
+                    {...form.getInputProps('password')}
+                    styles={{
+                        label:{
+                            color: "#404040"
+                        }
                     }}
                 />
             </Stack>
