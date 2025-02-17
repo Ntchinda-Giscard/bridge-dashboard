@@ -39,8 +39,9 @@ export default function AuthenticationImage() {
         email: values?.email,
         password: values?.password
       },
-      onCompleted: () =>{
+      onCompleted: (data) =>{
         toast.success("Login successful")
+        localStorage.setItem("bridge-token", data?.users?.[0])
       },
       onError: (err) =>{
         toast.error(`${err.message}`)
