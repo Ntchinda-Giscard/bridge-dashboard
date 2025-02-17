@@ -6,6 +6,8 @@ import { Provider } from 'react-redux'
 import {store} from "@/app/store";
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
+import { Toaster } from 'react-hot-toast';
+
 
 
 export default function Providers({
@@ -34,6 +36,7 @@ export default function Providers({
         </head>
         <body>
         <MantineProvider>
+          <Toaster />
             <Provider store={store}>
                 <ApolloProvider client={client}>
           <NextTopLoader

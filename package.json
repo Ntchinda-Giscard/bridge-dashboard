@@ -37,6 +37,7 @@
     "nextjs-toploader": "^3.7.15",
     "react": "^18",
     "react-dom": "^18",
+    "react-hot-toast": "^2.5.2",
     "react-redux": "^9.2.0",
     "recharts": "^2.13.0",
     "redux-persist": "^6.0.0"

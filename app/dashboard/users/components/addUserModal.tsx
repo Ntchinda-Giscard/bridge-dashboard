@@ -6,6 +6,8 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from "axios";
 import { INSERT_USERS } from '../mutation/mutation';
+import { GET_ROLES } from '../query/query';
+import toast from 'react-hot-toast';
 
 export default function AddUser({opened, close}: any) {
     
@@ -19,6 +21,7 @@ export default function AddUser({opened, close}: any) {
           phone_number: "",
           country: [],
           sexe: [],
+          role: [],
         },
     
         validate: {
@@ -26,7 +29,7 @@ export default function AddUser({opened, close}: any) {
             lastname: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
             password: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
+            phone_number: (value) => (/^[0-9][0-9]{8}$/.test(value)? null : 'Invalid phone number'),
         },
     });
         
@@ -38,14 +41,29 @@ export default function AddUser({opened, close}: any) {
     const [loading, setLoading] = useState(true);
     const [countries, setCountries] = useState([]);
 
+    const {data: dataRole, loading: loadRole, error: errRole} = useQuery(GET_ROLES)
+
  
     function handleSubmit(values: any){
         console.log(values)
         insertUser({
             variables:{
                 email: values?.email,
-                prenom: values?.firstname,
-                mot_passe: values?.password
+                mot_passe: values?.password,
+                nom: values?.firstname,
+                prenom: values?.lastname,
+                sexe: values?.sexe,
+                telephone: values?.phone_number,
+                role_id: values?.role,
+                country: values?.country
+
+
+            },
+            onCompleted: () =>{
+                toast.success("Operation successs")
+            },
+            onError: (err) =>{
+                toast.error(`Error: ${err}`)
             }
         })
     }
