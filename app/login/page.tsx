@@ -54,6 +54,7 @@ export default function AuthenticationImage() {
               key={form.key('email')}
               {...form.getInputProps('email')}
             />
+            
             <PasswordInput 
               label="Password" 
               styles={{label:{color: "#000"}}} 
