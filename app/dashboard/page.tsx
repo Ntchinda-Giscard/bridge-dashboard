@@ -1,6 +1,14 @@
+"use client"
 import StatsGrid from "../components/statGrid";
+import {useEffect} from "react"
 
 export default function Page(){
+
+    useEffect(() =>{
+        const token = localStorage.getItem("bridge-token");
+
+        console.log("my bridge token", token)
+    }, [])
 
     return(
         <>
