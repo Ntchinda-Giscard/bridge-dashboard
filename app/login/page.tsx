@@ -1,3 +1,4 @@
+"use client"
 import {
     Paper,
     TextInput,
@@ -10,29 +11,79 @@ import {
   } from '@mantine/core';
   import Link from  'next/link'
   import classes from '../components/NavbarSimple.module.css';
+import { useLazyQuery } from '@apollo/client';
+import { LOGIN_USER } from './query/login';
+import { useForm } from '@mantine/form';
+
   
-  export default function AuthenticationImage() {
+export default function AuthenticationImage() {
+  const [loginUser, {data: dataLogin}] = useLazyQuery(LOGIN_USER);
+  const form = useForm({
+    mode: 'uncontrolled',
+    initialValues: {
+      email: '',
+      password: '',
+    },
+
+    validate: {
+      email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
+      password: (value) => ( value?.length > 6 ? null : 'Invalid password'),
+    },
+  });
+  
+  function handleLogin(){
+    loginUser({
+      variables:{
+
+      }
+    })
+  }
     return (
       <div className={'h-sreen  '}>
-        <Paper className={''} radius={0} p={30}>
-          <Title order={2} className={''} c='#000'  ta="center" mt="md" mb={50}>
-            Welcome back to <Text className={classes.gradientText}> THE BRIDGE! </Text>
-          </Title>
-  
-          <TextInput label="Email address" styles={{label:{color: "#000"}}} placeholder="hello@gmail.com" size="md" />
-          <PasswordInput label="Password" styles={{label:{color: "#000"}}} placeholder="Your password" mt="md" size="md" />
-          <Checkbox  color="#0B8F23" label="Keep me logged in" mt="xl" size="md" />
-          <Button component={Link} href='/dashboard' color="#0B8F23" fullWidth mt="xl" size="md">
-            Login
-          </Button>
-  
-          <Text ta="center" mt="md" c="#000">
-            Don&apos;t have an account?{' '}
-            <Anchor c="#0B8F23" href="#" fw={700}>
-              Register
-            </Anchor>
-          </Text>
-        </Paper>
+        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+          <Paper className={''} radius={0} p={30}>
+            <Title order={2} className={''} c='#000'  ta="center" mt="md" mb={50}>
+              Welcome back to <Text className={classes.gradientText}> THE BRIDGE! </Text>
+            </Title>
+    
+            <TextInput 
+              label="Email address" 
+              styles={{label:{color: "#000"}}} 
+              placeholder="your@gmail.com" 
+              size="md" 
+              key={form.key('email')}
+              {...form.getInputProps('email')}
+            />
+            <PasswordInput 
+              label="Password" 
+              styles={{label:{color: "#000"}}} 
+              placeholder="Your password" 
+              mt="md" 
+              size="md" 
+              key={form.key('password')}
+              {...form.getInputProps('password')}
+            />
+            <Checkbox  color="#0B8F23" styles={{
+              label: {color: "#404040"}
+            }} label="Keep me logged in" mt="xl" size="md" />
+            <Button 
+              type="submit" 
+              // component={Link} 
+              // href='/dashboard' 
+              color="#0B8F23" 
+              fullWidth mt="xl" size="md">
+              Login
+            </Button>
+    
+            <Text ta="center" mt="md" c="#000">
+              Don&apos;t have an account?{' '}
+              <Anchor c="#0B8F23" href="#" fw={700}>
+                Register
+              </Anchor>
+            </Text>
+          </Paper>
+        </form>
+        
       </div>
     );
   }
