@@ -87,12 +87,12 @@ export default function AuthenticationImage() {
               Login
             </Button>
     
-            <Text ta="center" mt="md" c="#000">
+            {/* <Text ta="center" mt="md" c="#000">
               Don&apos;t have an account?{' '}
               <Anchor c="#0B8F23" href="#" fw={700}>
                 Register
               </Anchor>
-            </Text>
+            </Text> */}
           </Paper>
         </form>
         
