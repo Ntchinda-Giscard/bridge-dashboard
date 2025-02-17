@@ -29,6 +29,7 @@ export default function AddUser({opened, close}: any) {
             password: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
             email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
             phone_number: (value) => (/^[0-9][0-9]{8}$/.test(value)? null : 'Invalid phone number'),
+
         },
     });
         
@@ -54,7 +55,9 @@ export default function AddUser({opened, close}: any) {
 
             },
             onCompleted: () =>{
-                toast.success("Operation successs")
+                toast.success("Operation successs");
+                close()
+                form.reset()
             },
             onError: (err) =>{
                 toast.error(`Error: ${err}`)
