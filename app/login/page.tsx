@@ -33,6 +33,7 @@ export default function AuthenticationImage() {
   });
   
   function handleLogin(values: any){
+    console.log(values);
     loginUser({
       variables:{
         email: values?.email,
@@ -48,7 +49,7 @@ export default function AuthenticationImage() {
   }
     return (
       <div className={'h-sreen  '}>
-        <form onSubmit={form.onSubmit((values) => console.log(values))}>
+        <form onSubmit={form.onSubmit((values) => handleLogin(values))}>
           <Paper className={''} radius={0} p={30}>
             <Title order={2} className={''} c='#000'  ta="center" mt="md" mb={50}>
               Welcome back to <Text className={classes.gradientText}> THE BRIDGE! </Text>
