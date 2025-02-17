@@ -3,7 +3,7 @@ import { useState } from 'react';
 import cx from 'clsx';
 import { Avatar, Checkbox, Group, ScrollArea, Table, Text, ActionIcon } from '@mantine/core';
 import classes from './TableSelection.module.css';
-import { IconPencil, IconTrash, IconEye } from '@tabler/icons-react';
+import { IconPencil, IconTrash } from '@tabler/icons-react';
 
 
 const data = [

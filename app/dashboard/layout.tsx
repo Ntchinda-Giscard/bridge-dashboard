@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
 import Providers from "../providers";
 import { ResponsiveSizes } from "../appshell-layout";
 

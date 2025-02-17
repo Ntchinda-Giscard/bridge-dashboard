@@ -20,7 +20,7 @@ const data = [
 ];
 
 export function NavbarSimple() {
-  const [active, setActive] = useState(data[0].link);
+  // const [active, setActive] = useState(data[0].link);
   const router = useRouter();
   const pathname = usePathname();
 
@@ -37,10 +37,10 @@ export function NavbarSimple() {
       data-active={isActive(item.link) ?  item.label : undefined}
       href={item.link}
       key={item.label}
-      onClick={(event) => {
+      onClick={() => {
         // event.preventDefault();
         router.push(item.link);
-        setActive(item.label);
+        // setActive(item.label);
       }}
     >
       <item.icon 

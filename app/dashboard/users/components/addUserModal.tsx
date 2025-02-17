@@ -1,9 +1,8 @@
 "use client"
-import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import { Modal, Button, TextInput, Group, Stack, Select, Textarea, PasswordInput } from '@mantine/core';
+import { useMutation, useQuery } from '@apollo/client';
+import { Modal, Button, TextInput, Group, Stack, Select, PasswordInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import axios from "axios";
 import { INSERT_USERS } from '../mutation/mutation';
 import { GET_ROLES } from '../query/query';
@@ -33,12 +32,6 @@ export default function AddUser({opened, close}: any) {
         },
     });
         
-    const [deptArr, setDept] = useState([]);
-    const [servArr, setServ] = useState([]);
-    const [allArr, setAll] = useState([]);
-    const [arrVisitor, setAllVisitor] = useState([])
-    const [arrVehicle, setArrVehicle] = useState([])
-    const [loading, setLoading] = useState(true);
     const [countries, setCountries] = useState([]);
 
     const {data: dataRole, loading: loadRole, error: errRole} = useQuery(GET_ROLES)
@@ -83,7 +76,6 @@ export default function AddUser({opened, close}: any) {
           } catch (error) {
             console.error('Error fetching countries:', error);
           } finally {
-            setLoading(false);
           }
         };
     

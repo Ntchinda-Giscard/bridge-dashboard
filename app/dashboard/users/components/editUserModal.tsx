@@ -1,9 +1,7 @@
 "use client"
-import { useMutation, useQuery, useSubscription } from '@apollo/client';
-import { Modal, Button, TextInput, Group, Stack, Select, Textarea } from '@mantine/core';
+import { Modal, Button, TextInput, Group, Stack } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+
 
 export default function EditUser({opened, close}: any) {
     const form = useForm({
@@ -28,12 +26,6 @@ export default function EditUser({opened, close}: any) {
             // phone_number: (value) => (/^6[0-9]{8}$/.test(value)? null : 'Invalid phone number'),
         },
       });
-        
-        const [deptArr, setDept] = useState([]);
-        const [servArr, setServ] = useState([]);
-        const [allArr, setAll] = useState([]);
-        const [arrVisitor, setAllVisitor] = useState([])
-        const [arrVehicle, setArrVehicle] = useState([])
 
  
     function handleSubmit(values: any){
