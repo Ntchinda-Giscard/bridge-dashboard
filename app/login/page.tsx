@@ -14,10 +14,11 @@ import {
 import { useLazyQuery } from '@apollo/client';
 import { LOGIN_USER } from './query/login';
 import { useForm } from '@mantine/form';
+import toast from 'react-hot-toast';
 
   
 export default function AuthenticationImage() {
-  const [loginUser, {data: dataLogin}] = useLazyQuery(LOGIN_USER);
+  const [loginUser, {data: dataLogin, loading: loadingLogin}] = useLazyQuery(LOGIN_USER);
   const form = useForm({
     mode: 'uncontrolled',
     initialValues: {
@@ -31,10 +32,17 @@ export default function AuthenticationImage() {
     },
   });
   
-  function handleLogin(){
+  function handleLogin(values: any){
     loginUser({
       variables:{
-
+        email: values?.email,
+        password: values?.password
+      },
+      onCompleted: () =>{
+        toast.success("Login successful")
+      },
+      onError: (err) =>{
+        toast.error(`${err.message}`)
       }
     })
   }
@@ -54,7 +62,7 @@ export default function AuthenticationImage() {
               key={form.key('email')}
               {...form.getInputProps('email')}
             />
-            
+
             <PasswordInput 
               label="Password" 
               styles={{label:{color: "#000"}}} 
@@ -67,7 +75,8 @@ export default function AuthenticationImage() {
             <Checkbox  color="#0B8F23" styles={{
               label: {color: "#404040"}
             }} label="Keep me logged in" mt="xl" size="md" />
-            <Button 
+            <Button
+              loading={loadingLogin} 
               type="submit" 
               // component={Link} 
               // href='/dashboard' 
