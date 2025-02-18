@@ -1,5 +1,5 @@
 "use client"
-import { useState } from 'react';
+import { AwaitedReactNode, JSXElementConstructor, Key, ReactElement, ReactNode, ReactPortal, useState } from 'react';
 import cx from 'clsx';
 import { Avatar, Checkbox, Group, ScrollArea, Table, Text, ActionIcon } from '@mantine/core';
 import classes from './TableSelection.module.css';
@@ -63,23 +63,28 @@ export function UserTable({onDelete, onUpdate, datas}: any) {
     console.log("Employee data", datas)
   }, [])
 
-  const rows = data.map((item) => {
-    const selected = selection.includes(item.id);
+  const rows = datas.map((item: { id: Key | null | undefined | string ; avatar: string | null | undefined; prenom: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; nom: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; email: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; country: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }) => {
+    //@ts-ignore
+    const selected = selection.includes(item?.id);
     return (
       <Table.Tr key={item.id} className={cx({ [classes.rowSelected]: selected })}>
         <Table.Td>
-          <Checkbox color={"#0B8F23"} checked={selection.includes(item.id)} onChange={() => toggleRow(item.id)} />
+          <Checkbox color={"#0B8F23"} 
+          //@ts-ignore
+          checked={selection.includes(item?.id)} 
+          //@ts-ignore
+          onChange={() => toggleRow(item?.id)} />
         </Table.Td>
         <Table.Td>
           <Group gap="sm">
             <Avatar size={26} src={item.avatar} radius={26} />
             <Text size="sm" fw={500}>
-              {item.name}
+              {item.prenom} {item.nom}
             </Text>
           </Group>
         </Table.Td>
         <Table.Td>{item.email}</Table.Td>
-        <Table.Td>{item.job}</Table.Td>
+        <Table.Td>{item.country}</Table.Td>
         <Table.Td>
           <Group gap={0} justify="flex-end">
             <ActionIcon onClick={() => onUpdate(item)} variant="subtle" color="gray">
