@@ -4,7 +4,7 @@ import NextTopLoader from 'nextjs-toploader';
 import { ColorSchemeScript, MantineProvider } from '@mantine/core';
 import { Provider } from 'react-redux'
 import {store} from "@/app/store";
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
 import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/navigation'
@@ -18,6 +18,14 @@ export default function Providers({
   }) {
 
   const router = useRouter();
+
+  useEffect(() =>{
+    const token = localStorage.getItem("bridge-token");
+    if (token === null) router.push("/login")
+
+
+    console.log("my bridge token", token)
+}, [])
   const adminSecret = "rGvtJPPzqVUtdlnOA47eMp3DhiiNqqAF";
     const httpLink = new HttpLink({
         uri: "https://cheerful-crane-98.hasura.app/v1/graphql", // Replace with your Hasura GraphQL URL
