@@ -56,7 +56,7 @@ const jobColors: Record<string, string> = {
   rejeter: 'pink',
 };
 
-export function DemandTable() {
+export function DemandTable({onDelete, onEdit}: any) {
   const rows = data.map((item) => (
     <Table.Tr key={item.name}>
       <Table.Td>
@@ -92,7 +92,7 @@ export function DemandTable() {
           <ActionIcon variant="subtle" color="blue">
             <IconEye size={16} stroke={1.5} />
           </ActionIcon>
-          <ActionIcon variant="subtle" color="red">
+          <ActionIcon onClick={() => onDelete(item)} variant="subtle" color="red">
             <IconTrash size={16} stroke={1.5} />
           </ActionIcon>
         </Group>

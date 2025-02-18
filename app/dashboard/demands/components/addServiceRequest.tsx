@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 import axios from "axios";
 import toast from 'react-hot-toast';
 
-export default function AddUser({opened, close}: any) {
+export default function AddDemand({opened, close}: any) {
     
     const form = useForm({
         mode: 'uncontrolled',

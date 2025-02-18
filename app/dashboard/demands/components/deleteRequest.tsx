@@ -4,7 +4,7 @@ import { Modal, Button, Group } from '@mantine/core';
 import { useEffect } from 'react';
 import toast from 'react-hot-toast';
 
-export default function DeleteUserModal({data, opened, close}: any) {
+export default function DeleteDemand({data, opened, close}: any) {
 
 
     useEffect(() =>{
