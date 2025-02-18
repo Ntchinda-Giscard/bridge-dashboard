@@ -1,14 +1,31 @@
 "use client"
+import { useMutation } from '@apollo/client';
 import { Modal, Button, Group } from '@mantine/core';
 import { useEffect } from 'react';
+import { DELETE_USERS } from '../mutation/mutation';
+import toast from 'react-hot-toast';
 
 export default function DeleteUserModal({data, opened, close}: any) {
+
+  const [deleteUser, {data: dataDelete, loading: loadingDelete}] = useMutation(DELETE_USERS);
 
     useEffect(() =>{
         console.log(data)
     }, [data])
     const handleDelete= () =>{
-
+        deleteUser({
+            variables:{
+                id: data?.id
+            },
+            onCompleted: (data) =>{
+                close()
+                toast.success("Operation sucessful")
+            },
+            onError: (err) =>{
+                console.log(err)
+                toast.error("Operation failed")
+            }
+        })
     }
   return (
     <>

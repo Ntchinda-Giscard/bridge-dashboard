@@ -63,7 +63,9 @@ export function UserTable({onDelete, onUpdate, datas}: any) {
     console.log("Employee data", datas)
   }, [])
 
-  const rows = datas.map((item: { id: Key | null | undefined | string ; avatar: string | null | undefined; prenom: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; nom: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; email: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; country: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }) => {
+  const rows = datas.map((item: {
+    telephone: ReactNode; id: Key | null | undefined | string ; avatar: string | null | undefined; prenom: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; nom: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; email: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; country: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; 
+}) => {
     //@ts-ignore
     const selected = selection.includes(item?.id);
     return (
@@ -83,8 +85,9 @@ export function UserTable({onDelete, onUpdate, datas}: any) {
             </Text>
           </Group>
         </Table.Td>
-        <Table.Td>{item.email}</Table.Td>
-        <Table.Td>{item.country}</Table.Td>
+        <Table.Td c="dark">{item.email}</Table.Td>
+        <Table.Td c="dark">{item.telephone}</Table.Td>
+        <Table.Td c="dark">{item.country}</Table.Td>
         <Table.Td>
           <Group gap={0} justify="flex-end">
             <ActionIcon onClick={() => onUpdate(item)} variant="subtle" color="gray">
@@ -114,6 +117,7 @@ export function UserTable({onDelete, onUpdate, datas}: any) {
             </Table.Th>
             <Table.Th>User</Table.Th>
             <Table.Th>Email</Table.Th>
+            <Table.Th>Telephone</Table.Th>
             <Table.Th>Country</Table.Th>
           </Table.Tr>
         </Table.Thead>

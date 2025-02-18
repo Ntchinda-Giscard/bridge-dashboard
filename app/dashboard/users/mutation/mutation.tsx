@@ -6,3 +6,10 @@ mutation InsertUser($email: String!, $mot_passe: String!, $nom: String!, $prenom
     id
   }
 }`;
+
+export const DELETE_USERS = gql`
+mutation MyMutation($id: uuid!) {
+  delete_users_by_pk(id: $id) {
+    id
+  }
+}`;
