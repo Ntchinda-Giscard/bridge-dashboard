@@ -9,7 +9,7 @@ query GetRoles {
 }`;
 
 export const GET_USERS = gql`
-subscription MyQuery($limit: Int, $offset: Int) {
+query MyQuery($limit: Int, $offset: Int) {
   users(limit: $limit, offset: $offset) {
     id
     country

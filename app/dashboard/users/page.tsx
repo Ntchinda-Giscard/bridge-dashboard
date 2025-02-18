@@ -23,7 +23,7 @@ export default function Page(){
     const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const [editOpenedVisitor, { open: openEdit, close: closeEdit }] = useDisclosure(false);
-    const {data: dataEmployee, loading: loadEmployee, error: errEmployee} = useSubscription(GET_USERS, {
+    const {data: dataEmployee, loading: loadEmployee, error: errEmployee} = useQuery(GET_USERS, {
         variables:{
             limit: itemsPerPage,
             offset: (activePage-1) * itemsPerPage,
