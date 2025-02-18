@@ -7,6 +7,7 @@ import {store} from "@/app/store";
 import React from 'react';
 import { ApolloClient, InMemoryCache, ApolloProvider, HttpLink } from '@apollo/client';
 import { Toaster } from 'react-hot-toast';
+import { useRouter } from 'next/navigation'
 
 
 
@@ -15,6 +16,8 @@ export default function Providers({
   }: {
     children: React.ReactNode;
   }) {
+
+  const router = useRouter();
   const adminSecret = "rGvtJPPzqVUtdlnOA47eMp3DhiiNqqAF";
     const httpLink = new HttpLink({
         uri: "https://cheerful-crane-98.hasura.app/v1/graphql", // Replace with your Hasura GraphQL URL

@@ -8,6 +8,8 @@ import { useEffect, useState } from "react";
 import DeleteUserModal from "./components/deleteUserModal";
 import EditUser from "./components/editUserModal";
 import axios from "axios";
+import { useQuery, useSubscription } from "@apollo/client";
+import { GET_USERS } from "./query/query";
 
 
 export default function Page(){
@@ -17,8 +19,16 @@ export default function Page(){
     const [countries, setCountries] = useState([]);
     const [editValue, setEditValue] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [activePage, setPage] = useState(1);
+    const [itemsPerPage, setItemsPerPage] = useState(10);
 
     const [editOpenedVisitor, { open: openEdit, close: closeEdit }] = useDisclosure(false);
+    const {data: dataEmployee, loading: loadEmployee, error: errEmployee} = useSubscription(GET_USERS, {
+        variables:{
+            limit: itemsPerPage,
+            offset: (activePage-1) * itemsPerPage,
+        }
+    });
 
     const handleDelete= (v: any) =>{
         setDeleteData(v)
@@ -30,6 +40,7 @@ export default function Page(){
         openEdit()
     }
 
+    if (errEmployee) return <div> {`${errEmployee}`} </div>
 
     
 
@@ -70,10 +81,13 @@ export default function Page(){
                     </div>
 
                 </div>
+               {
+                dataEmployee?.users &&
                 <UserTable
+                    datas={ dataEmployee?.users }
                     onDelete={(v:any) =>handleDelete(v)}
                     onUpdate={(v:any) =>handleEdit(v)}
-                />
+                />}
             </Paper>
         </main>
     )

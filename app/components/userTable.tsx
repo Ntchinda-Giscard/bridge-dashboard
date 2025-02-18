@@ -4,6 +4,7 @@ import cx from 'clsx';
 import { Avatar, Checkbox, Group, ScrollArea, Table, Text, ActionIcon } from '@mantine/core';
 import classes from './TableSelection.module.css';
 import { IconPencil, IconTrash } from '@tabler/icons-react';
+import { useEffect } from "react"
 
 
 const data = [
@@ -49,7 +50,7 @@ const data = [
   },
 ];
 
-export function UserTable({onDelete, onUpdate}: any) {
+export function UserTable({onDelete, onUpdate, datas}: any) {
   const [selection, setSelection] = useState(['1']);
   const toggleRow = (id: string) =>
     setSelection((current) =>
@@ -57,6 +58,10 @@ export function UserTable({onDelete, onUpdate}: any) {
     );
   const toggleAll = () =>
     setSelection((current) => (current.length === data.length ? [] : data.map((item) => item.id)));
+
+  useEffect(() =>{
+    console.log("Employee data", datas)
+  }, [])
 
   const rows = data.map((item) => {
     const selected = selection.includes(item.id);
