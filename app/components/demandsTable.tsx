@@ -1,5 +1,5 @@
 "use client"
-import { IconPencil, IconTrash, IconEye, IconCheck } from '@tabler/icons-react';
+import { IconPencil, IconTrash, IconX, IconCheck } from '@tabler/icons-react';
 import { ActionIcon, Anchor, Avatar, Badge, Group, Table, Text } from '@mantine/core';
 import { Key, ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, ReactPortal } from 'react';
 
@@ -57,7 +57,7 @@ const jobColors: Record<string, string> = {
   rejeter: 'pink',
 };
 
-export function DemandTable({onDelete, onEdit, datas}: any) {
+export function DemandTable({onDelete, onEdit, onCancel, onCheck, datas}: any) {
   const rows = datas.map((item: { name: Key | null | undefined; avatar: string | null | undefined; user: {
     telephone: ReactNode;
     email: ReactNode; nom: any; prenom: any; 
@@ -99,8 +99,11 @@ export function DemandTable({onDelete, onEdit, datas}: any) {
           <ActionIcon variant="subtle" color="gray">
             <IconPencil size={16} stroke={1.5} />
           </ActionIcon>
-          <ActionIcon variant="subtle" color="blue">
-            <IconCheck size={16} stroke={1.5} />
+          <ActionIcon onClick={() => onCheck(item)} variant="subtle" color="blue">
+            <IconCheck size={20} stroke={1.5} />
+          </ActionIcon>
+          <ActionIcon onClick={() => onCancel(item)} variant="subtle" color="red">
+            <IconX size={20} stroke={1.5} />
           </ActionIcon>
           <ActionIcon onClick={() => onDelete(item)} variant="subtle" color="red">
             <IconTrash size={16} stroke={1.5} />

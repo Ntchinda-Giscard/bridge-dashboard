@@ -24,6 +24,13 @@ export default function Page(){
         setDeleteData(v)
         openDelete()
     }
+    const handleCheck = (v: any  ) =>{
+
+    }
+
+    const handleCancel = (v: any) =>{
+
+    }
 
     return(
         <main className="flex min-h-full flex-col gap-3">  
@@ -62,6 +69,8 @@ export default function Page(){
                     dataReq?.service_requests &&
                     <DemandTable
                         onDelete={(v:any) =>handleDelete(v)}
+                        onCheck={(v:any) => handleCheck(v)}
+                        onCancel={(v: any) => handleCancel(v)}
                         datas={dataReq?.service_requests}
                     />
                 }
