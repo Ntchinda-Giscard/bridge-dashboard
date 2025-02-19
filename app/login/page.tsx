@@ -42,10 +42,13 @@ export default function AuthenticationImage() {
         mot_passe: values?.password
       },
       onCompleted: (data) =>{
-        toast.success("Login successful")
         if(data?.users?.length >= 1) {
+          toast.success("Login successful")
           localStorage.setItem("bridge-token", data?.users?.[0])
           router.push("/dashboard")
+        }
+        else{
+          toast.error("Login failed")
         }
         
       },
