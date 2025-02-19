@@ -5,34 +5,31 @@ import { useForm } from '@mantine/form';
 import { useEffect, useState } from 'react';
 import axios from "axios";
 import toast from 'react-hot-toast';
+import { CLIENT_USER } from '../query/getClientUser';
+import { GET_SERVICES } from '../query/getService';
 
 export default function AddDemand({opened, close}: any) {
+
+  const {data: dataClient, error: errClients, loading: loadClients} = useQuery(CLIENT_USER);
+  const {data: dataService, error: errService, loading: loadService} = useQuery(GET_SERVICES);
     
     const form = useForm({
         mode: 'uncontrolled',
         initialValues: {
-          firstname: "",
-          lastname: "",
-          email: '',
-          password: '',
-          phone_number: "",
-          country: [],
-          sexe: [],
-          role: [],
+          clients: [],
+          service: [],
         },
     
         validate: {
-            firstname: (value) => ( value.length < 3 ? "Firtname must be 3 character at least" : null),
-            lastname: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
-            password: (value) => ( value.length < 3 ? "Lastname must be 3 character at least" : null),
-            email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-            phone_number: (value) => (/^[0-9][0-9]{8}$/.test(value)? null : 'Invalid phone number'),
+          clients: (value) => ( value.length < 1 ? "Firtname must be 3 character at least" : null),
+          service: (value) => ( value.length < 1 ? "Lastname must be 3 character at least" : null),
+
 
         },
     });
         
-    const [countries, setCountries] = useState([]);
-    const [roles, setRoles] = useState([])
+    const [services, setServices] = useState([]);
+    const [clients, setClients] = useState([])
 
  
     function handleSubmit(values: any){
@@ -42,12 +39,18 @@ export default function AddDemand({opened, close}: any) {
 
     useEffect(() => {
 
-        // const dataRoles = dataRole?.roles?.map((r: { id: string; name: string; }) =>({
-        //     value: r?.id,
-        //     label: r?.name
-        // }))
+        const dataServices = dataService?.service?.map((r: { id: string; service_name: string; }) =>({
+            value: r?.id,
+            label: r?.service_name
+        }));
 
-        // setRoles(dataRoles)
+        const dataClients = dataClient?.users?.map((c: { id: any; nom: any; prenom: any; }) =>({
+          value: c?.id,
+          label: `${c?.nom} ${c?.prenom}`
+      }))
+
+        setServices(dataServices)
+        setClients(dataClients)
 
     }, []);
 
@@ -56,6 +59,37 @@ export default function AddDemand({opened, close}: any) {
       <Modal opened={opened} size="lg" onClose={close} title= {<p style={{color: "#404040"}}> Ajouter Utilisateur </p>}>
         {/* Modal content */}
         <form onSubmit={form.onSubmit((values) => handleSubmit(values))}>
+
+        <Select
+                        mt={'lg'}
+                        withAsterisk
+                        radius={'sm'}
+                        data={clients}
+                        label="Genre"
+                        placeholder="Clients"
+                        searchable
+                        key={form.key('clients')}
+                        {...form.getInputProps('clients')}
+                        styles={{
+                            label:{color: "#404040"},
+                            option:{color: "#404040"}
+                        }}
+                    />
+                    <Select
+                        mt={'lg'}
+                        withAsterisk
+                        radius={'sm'}
+                        data={services}
+                        label="Role"
+                        placeholder="select"
+                        searchable
+                        key={form.key('service')}
+                        {...form.getInputProps('service')}
+                        styles={{
+                            label:{color: "#404040"},
+                            option:{color: "#404040"}
+                        }}
+                    />
 
             <Group justify="flex-end" mt="md" grow>
                 <Button bg={"#0B8F23"} type="submit">Soumettre</Button>
