@@ -1,6 +1,7 @@
 "use client"
-import { IconPencil, IconTrash, IconEye } from '@tabler/icons-react';
+import { IconPencil, IconTrash, IconEye, IconCheck } from '@tabler/icons-react';
 import { ActionIcon, Anchor, Avatar, Badge, Group, Table, Text } from '@mantine/core';
+import { Key, ReactElement, JSXElementConstructor, ReactNode, AwaitedReactNode, ReactPortal } from 'react';
 
 const data = [
   {
@@ -56,33 +57,42 @@ const jobColors: Record<string, string> = {
   rejeter: 'pink',
 };
 
-export function DemandTable({onDelete, onEdit}: any) {
-  const rows = data.map((item) => (
+export function DemandTable({onDelete, onEdit, datas}: any) {
+  const rows = datas.map((item: { name: Key | null | undefined; avatar: string | null | undefined; user: {
+    telephone: ReactNode;
+    email: ReactNode; nom: any; prenom: any; 
+}; request_status: { status_name: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | Promise<AwaitedReactNode> | null | undefined; }; request_date: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; email: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; telephone: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; service: { service_name: string | number | bigint | boolean | ReactElement<any, string | JSXElementConstructor<any>> | Iterable<ReactNode> | ReactPortal | Promise<AwaitedReactNode> | null | undefined; }; }) => (
     <Table.Tr key={item.name}>
       <Table.Td>
         <Group gap="sm">
           <Avatar size={30} src={item.avatar} radius={30} />
           <Text fz="sm" fw={500}>
-            {item.name}
+            { `${item?.user?.nom} ${item?.user?.prenom}` }
           </Text>
         </Group>
       </Table.Td>
 
       <Table.Td>
-        <Badge color={jobColors[item.job.toLowerCase()]} variant="light">
-          {item.job}
+        <Badge color={
+          //@ts-ignore
+          jobColors[item?.request_status?.status_name?.toLowerCase()]
+          } variant="light">
+          {item?.request_status?.status_name}
         </Badge>
       </Table.Td>
       <Table.Td>
-        <Text fz="sm">{item.date}</Text>
+        <Text fz="sm">{item?.request_date}</Text>
       </Table.Td>
       <Table.Td>
         <Anchor component="button" size="sm">
-          {item.email}
+          {item?.user?.email}
         </Anchor>
       </Table.Td>
       <Table.Td>
-        <Text fz="sm">{item.phone}</Text>
+        <Text fz="sm">{item?.user?.telephone}</Text>
+      </Table.Td>
+      <Table.Td>
+        <Text fz="sm">{item?.service?.service_name}</Text>
       </Table.Td>
       <Table.Td>
         <Group gap={0} justify="flex-end">
@@ -90,7 +100,7 @@ export function DemandTable({onDelete, onEdit}: any) {
             <IconPencil size={16} stroke={1.5} />
           </ActionIcon>
           <ActionIcon variant="subtle" color="blue">
-            <IconEye size={16} stroke={1.5} />
+            <IconCheck size={16} stroke={1.5} />
           </ActionIcon>
           <ActionIcon onClick={() => onDelete(item)} variant="subtle" color="red">
             <IconTrash size={16} stroke={1.5} />
@@ -110,6 +120,7 @@ export function DemandTable({onDelete, onEdit}: any) {
             <Table.Th>Date</Table.Th>
             <Table.Th>Email</Table.Th>
             <Table.Th>Phone</Table.Th>
+            <Table.Th>Demande</Table.Th>
             <Table.Th />
           </Table.Tr>
         </Table.Thead>

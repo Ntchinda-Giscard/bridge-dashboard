@@ -5,6 +5,8 @@ import { useDisclosure } from "@mantine/hooks";
 import AddDemand from "./components/addServiceRequest";
 import DeleteDemand from "./components/deleteRequest";
 import { useState } from "react"
+import { useQuery } from "@apollo/client";
+import { GET_SERVICES_REQ } from "./query/getServiceRequest";
 
 
 export default function Page(){
@@ -14,6 +16,8 @@ export default function Page(){
 
     const [deleteData, setDeleteData] = useState();
     const [editValue, setEditValue] = useState(null);
+
+    const {data: dataReq, loading: loadReq, error: errReq} = useQuery(GET_SERVICES_REQ);
 
 
     const handleDelete= (v: any) =>{
@@ -54,9 +58,13 @@ export default function Page(){
                     
                     
                 </div>
-                <DemandTable
-                    onDelete={(v:any) =>handleDelete(v)}
-                />
+                {
+                    dataReq?.service_requests &&
+                    <DemandTable
+                        onDelete={(v:any) =>handleDelete(v)}
+                        datas={dataReq?.service_requests}
+                    />
+                }
             </Paper>
         </main>
     )
