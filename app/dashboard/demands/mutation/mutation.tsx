@@ -7,3 +7,18 @@ mutation MyMutation($client_id: uuid!, $service_id: uuid = "", $status_id: uuid!
     id
   }
 }`;
+
+export const UPDATE_CANCEL = gql`
+mutation MyMutation($id: uuid = "", $status_id: uuid = "c56723be-ae07-4c3f-b08d-2de015bb452d") {
+  update_service_requests_by_pk(pk_columns: {id: $id}, _set: {status_id: $status_id}) {
+    id
+  }
+}`;
+
+
+export const UPDATE_CHECK = gql`
+mutation MyMutation($id: uuid = "", $status_id: uuid = "f8b7a29c-a3e3-4eec-a1b9-74c350b8fe61") {
+  update_service_requests_by_pk(pk_columns: {id: $id}, _set: {status_id: $status_id}) {
+    id
+  }
+}`;
