@@ -24,7 +24,7 @@ export function NavbarSimple() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const isActive = (path: string) => {
+  const isActive = (path: string): boolean => {
     if (path === '/dashboard') {
       return pathname === '/dashboard';
     }
